@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sentiment Search Engine</title>
+
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
+
+	<style type="text/css">
+
+		#chartdiv {
+		  width: 100%;
+		  height: 500px;
+		}
+		
+	</style>
+
+
+		<script type="text/javascript">
+
+			// PIE CHART
+
+			// Load google charts
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+			// Draw the chart and set the chart values
+			function drawChart() {
+				  var data = google.visualization.arrayToDataTable([
+				  	['Sentiment', 'Analysis'],
+					['Positive', 3],
+					['Neutral', 5],
+					['Neative', 4]
+				  ]);
+
+				  // Optional; add a title and set the width and height of the chart
+				  var options = {
+				  	width: 400,
+				  	height: 400,
+				  	colors: ['#34A853', '#FBBC05' ,'#EA4335']
+				  };
+
+				  // Display the chart inside the <div> element with id="piechart"
+				  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+				  chart.draw(data, options);
+			}
+
+
+// Highcharts.theme = {
+//     colors: ['#34A853', '#FBBC05' ,'#EA4335']
+//          }
+
+Highcharts.chart('pie_chart', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Browser market shares in January, 2018'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Chrome',
+            y: 61.41,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Internet Explorer',
+            y: 11.84
+        }, {
+            name: 'Firefox',
+            y: 10.85
+        }, {
+            name: 'Edge',
+            y: 4.67
+        }, {
+            name: 'Safari',
+            y: 4.18
+        }, {
+            name: 'Sogou Explorer',
+            y: 1.64
+        }, {
+            name: 'Opera',
+            y: 1.6
+        }, {
+            name: 'QQ',
+            y: 1.2
+        }, {
+            name: 'Other',
+            y: 2.61
+        }]
+    }]
+});
+
+
+// Highcharts.setOptions(Highcharts.theme);
+
+
+			
+		</script>
+</head>
+<body id="mainPage">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2 text-center cBlue fontL">S.S.E</div>
+
+			<div class="col-xs-7 text-center">
+				<input type="text" class="form-control searchBox" name="searchBox" placeholder="Search here ..." />
+			</div>
+
+			<div class="col-xs-">
+				<button class="glyphicon glyphicon-search searchBtn cBlue" type="submit"></button>
+			</div>
+		</div> <!-- row -->
+
+		<div class="row resultBox">
+			<hr/>
+			<div class="col-xs-9 comments">
+				<div class="row">
+					<div class="col-xs-4 posBtn">
+						<p class="cGreen fontL">Positive</p>
+					</div>
+
+					<div class="col-xs-4 neuBtn">
+						<p class="cYellow fontL">Neutral</p>
+					</div>
+
+					<div class="col-xs-4 negBtn">
+						<p class="cRed fontL">Negative</p>
+					</div>
+				</div> <!-- row -->
+				<br>
+
+				<div class="row posComments">
+					<p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+					<hr>
+					<div id="pie_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+					<br/>
+
+
+				</div> <!-- row -->
+
+
+				<div class="row neuComments">
+					
+				</div> <!-- row -->
+
+				<div class="row negComments">
+					
+				</div> <!-- row -->
+			</div> <!-- comments -->
+
+			<div class="col-xs-3 summary">
+				<div class="row">
+					<p class="fontL cBlue" >Summary</p>
+				</div> <!-- row -->
+				<br/>
+
+				<div class="row" id="piechart"></div>
+			</div> <!-- summary -->
+		</div> <!--  resultBox -->
+	</div> <!-- container -->
+</body>

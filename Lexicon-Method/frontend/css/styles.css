@@ -1,0 +1,96 @@
+.cGreen {
+	color: #34A853;
+}
+
+.cRed {
+	color: #EA4335;
+}
+
+.cYellow {
+	color: #FBBC05;
+}
+
+.cBlue {
+	color: #4285F4;
+}
+
+.bgGreen {
+	background-color: #34A853;
+}
+
+.bgRed {
+	background-color: #EA4335;
+}
+
+.bgYellow {
+	background-color: #FBBC05;
+}
+
+.fontL {
+	font-size: 25px;
+}
+
+
+
+
+/*-------------------------------------------------------
+INDEX PAGE
+-------------------------------------------------------*/
+
+#index {
+	padding-top: 15%;
+}
+
+.logo {
+	 font-size: 40px;
+}
+
+.bar {
+	height: 5px;
+}
+
+.txt {
+	margin-top: 10%;
+}
+
+.searchBtn {
+	font-size: 30px;
+	background-color: transparent;
+	border: none;
+}
+
+
+
+
+/*-------------------------------------------------------
+MAIN PAGE
+-------------------------------------------------------*/
+
+#mainPage {
+	padding-top: 2%;
+}
+
+.resultBox {
+	margin-top: 50px;
+}
+
+.summary {
+	border-left: 1px solid #EEEEEE;
+}
+
+.summary p {
+	text-align: center;
+}
+
+.posBtn p , .neuBtn p , .negBtn p {
+	text-align: center;
+}
+
+.posBtn {
+	border-bottom: 2px solid #4285F4;
+}
+
+.posComments p {
+	padding: 0 5px 0 5px;
+	border-left: 2px solid #34A853;
+}
