@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>S.S.E | Results</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static' , filename='css/styles.css') }}"
+    />
+    <script src="{{url_for('static' , filename='js/jquery.js')}}"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{{url_for('static' , filename='js/bootstrap.min.js')}}"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static' , filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static' , filename='css/bootstrap-theme.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static' , filename='css/styles.css')}}"
+    />
+  </head>
+  <body id="mainPage">
+    <section id="top"></section>
+
+    <div class="container">
+      <div class="row">
+        <form method="POST" accept="{{ url_for('results') }}">
+          <div class="col-xs-2 text-center cBlue fontL">S.S.E</div>
+
+          <div class="col-xs-7 text-center">
+            <input
+              type="text"
+              class="form-control searchBox"
+              name="searchQuery"
+              placeholder="Search here ..."
+            />
+          </div>
+
+          <div class="col-xs-">
+            <button
+              class="glyphicon glyphicon-search searchBtn cBlue"
+              type="submit"
+              name="searchBtn"
+              value="searchQuery"
+            ></button>
+          </div>
+        </form>
+      </div>
+      <!-- row -->
+
+      <div class="row resultBox">
+        <hr />
+        <div class="col-xs-9 allComments">
+          <div class="row">
+            <div class="col-xs-4 posBtn selected">
+              <p class="cGreen fontL">Positive</p>
+            </div>
+
+            <div class="col-xs-4 neuBtn">
+              <p class="cYellow fontL">Neutral</p>
+            </div>
+
+            <div class="col-xs-4 negBtn">
+              <p class="cRed fontL">Negative</p>
+            </div>
+          </div>
+          <!-- row -->
+          <br />
+
+          <div class="row posComments">
+            {% for l in returned.posComment %}
+
+            <p>{{ l }}</p>
+            <hr />
+
+            {% endfor %}
+          </div>
+          <!-- row -->
+
+          <div class="row neuComments">
+            {% for l in returned.neuComment %}
+
+            <p>{{ l }}</p>
+            <hr />
+
+            {% endfor %}
+          </div>
+          <!-- row -->
+
+          <div class="row negComments">
+            {% for l in returned.negComment %}
+
+            <p>{{ l }}</p>
+            <hr />
+
+            {% endfor %}
+          </div>
+          <!-- row -->
+        </div>
+        <!-- allComments -->
+
+        <div class="col-xs-3 summary  text-center">
+          <div class="row">
+            <p class="fontL cBlue">Summary</p>
+          </div>
+          <!-- row -->
+          <br />
+          <br />
+
+          <div class="row">
+            <label class="optionBtn" data-toggle="modal" data-target="#pieChart"
+              >Pie Chart</label
+            >
+            <br /><br />
+
+            <label class="optionBtn" data-toggle="modal" data-target="#barChart"
+              >Bar Chart</label
+            >
+          </div>
+          <!-- row -->
+        </div>
+        <!-- summary -->
+      </div>
+      <!--  resultBox -->
+      <br /><br />
+
+      <div class="row text-center">
+        <a href="#top" class="topBtn bgBlue glyphicon glyphicon-menu-up"></a>
+      </div>
+      <!-- row -->
+      <br /><br />
+    </div>
+    <!-- container -->
+
+    <!-- piechart Modal -->
+    <div
+      class="modal fade"
+      id="pieChart"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="pieChart"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+          <div class="modal-header">
+            <p class=".fontL cBlue">Pie Chart</p>
+          </div>
+
+          <div class="modal-body rowlex">
+            <div id="pie_chart"></div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+        <!-- modal-content -->
+      </div>
+      <!-- modal-dialog -->
+    </div>
+    <!-- pieChart -->
+
+    <!-- barChart Modal -->
+    <div
+      class="modal fade"
+      id="barChart"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="pieChart"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+          <div class="modal-body rowlex">
+            <div id="bar_Chart" style="width:100%; height:400px;"></div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+        <!-- modal-content -->
+      </div>
+      <!-- modal-dialog -->
+    </div>
+    <!-- barChart -->
+
+    <script type="text/javascript">
+
+      // PIE CHART ==============================
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Draw the pie chart and set the chart values
+      function drawChart() {
+      	  var data = google.visualization.arrayToDataTable([
+      	  	['Sentiment', 'Analysis'],
+      		['Positive', {{returned.posCount}}],
+      		['Neutral', {{returned.neuCount}}],
+      		['Negative', {{returned.negCount}}]
+      	  ]);
+
+      	  // Optional; add a title and set the width and height of the chart
+      	  var options = {
+      	  	width: 500,
+      	  	height: 400,
+      	  	colors: ['#34A853', '#FBBC05' ,'#EA4335']
+      	  };
+
+      	  // Display the chart inside the <div> element with id="piechart"
+      	  var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+      	  chart.draw(data, options);
+      }
+
+
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawTitleSubtitle);
+
+
+      // BAR CHART
+
+      function drawTitleSubtitle() {
+      	var data = google.visualization.arrayToDataTable([
+      				['Comment Class', 'Dominant', { role: 'style' }],
+      				['Positive', {{returned.posCount}} , '#34A853'],            // RGB value
+      				['Neutral', {{returned.negCount}} , '#FBBC05'],            // English color name
+      				['Negative', {{returned.negCount}} , '#EA4335'],
+      				]);
+
+      	var materialOptions = {
+      		bars: 'horizontal'
+      	};
+      	var materialChart = new google.charts.Bar(document.getElementById('bar_chart'));
+      	materialChart.draw(data, materialOptions);
+      }
+
+      // PIE CHART ==============================
+
+
+
+      //BAR CHART ==============================
+
+
+
+      Highcharts.theme = {
+          colors: ['#34A853', '#FBBC05' ,'#EA4335']
+               }
+
+      $(function () {
+          var myChart = Highcharts.chart('bar_Chart', {
+              chart: {
+                  type: 'bar'
+              },
+              title: {
+                  text: 'Comments'
+              },
+              xAxis: {
+                  categories: ['Positive', 'Neutral', 'Negative']
+              },
+              yAxis: {
+                  title: {
+                 		text: 'number of comments'
+                  }
+              },
+              series: [{
+                  name: 'Positive',
+                  data: [{{returned.posCount}} , 0 ,0]
+              }, {
+                  name: 'Neutral',
+                  data: [0, {{returned.neuCount}} ,0]
+              },{
+                  name: 'Negative',
+                  data: [0 , 0, {{returned.negCount}}]
+              }]
+          });
+      });
+
+
+      Highcharts.setOptions(Highcharts.theme);
+
+
+
+
+      //BAR CHART ==============================
+
+
+      $('document').ready(function(){
+
+      	$('.neuComments').hide();
+      	$('.negComments').hide();
+
+      	$('.posBtn').click(function(){
+      		$('.negBtn , .neuBtn').removeClass('selected');
+      		$(this).addClass('selected');
+
+      		$('.negComments , .neuComments').hide();
+      		$('.posComments').show();
+      	});
+
+      	$('.neuBtn').click(function(){
+      		$('.posBtn , .negBtn').removeClass('selected');
+      		$(this).addClass('selected');
+
+      		$('.posComments , .negComments').hide();
+      		$('.neuComments').show();
+      	});
+
+      	$('.negBtn').click(function(){
+      		$('.posBtn , .neuBtn').removeClass('selected');
+      		$(this).addClass('selected');
+
+      		$('.posComments , .neuComments').hide();
+      		$('.negComments').show();
+      	});
+      });
+    </script>
+  </body>
+</html>

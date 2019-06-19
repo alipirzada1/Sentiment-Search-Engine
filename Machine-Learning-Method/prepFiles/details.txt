@@ -1,0 +1,6 @@
+Data Read Time is : 1.8562415316905883
+Making Numeric Matrix Time : 0.271312360304582
+Training at 1000 features and 48000 instances Time is : 443.9311747169022
+Testing at 2000 samples Time is : 0.8827997829270317
+SVM Accuracy is : 79.9
+=================================================

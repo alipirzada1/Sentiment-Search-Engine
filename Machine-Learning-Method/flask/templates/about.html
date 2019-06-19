@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>S.S.E | About Us</title>
+    <script src="{{ url_for('static' , filename= 'js/jquery.js') }}"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script src="{{ url_for('static' , filename='js/bootstrap.min.js') }}"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static' , filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static' , filename='css/bootstrap-theme.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static' , filename='css/styles.css')}}"
+    />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-1">
+          <br />
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3 text-center">
+              <span class="logo cBlue">Sentiment Search Engine</span>
+            </div>
+          </div>
+          <!-- row -->
+          <br />
+
+          <div class="row text-center">
+            <img
+              src="{{ url_for('static' , filename='images/faces.png') }}"
+              alt="logo"
+              width="200px"
+              height="auto"
+            />
+          </div>
+          <!-- row -->
+
+          <div class="row">
+            <div class="col-xs-2 col-xs-offset-3 bar bgGreen"></div>
+            <div class="col-xs-2 text-center bar bgYellow"></div>
+            <div class="col-xs-2 text-center bar bgRed"></div>
+          </div>
+          <!-- row -->
+          <br />
+          <br />
+          <br />
+
+          <div class="row text-center">
+            <p class="heading">Developer's Message</p>
+          </div>
+          <!-- row -->
+          <br />
+
+          <div class="row">
+            <p>
+              Greetings everyone we welcome you to our Project. This is a Final
+              Year Project of Students of Bachelor’s Degree. The sole purpose of
+              this project is to showcase the efforts and the understanding of
+              the group members regarding different technologies that are used
+              in the project as well as the problem they tried to solve.
+              <i
+                ><u
+                  >The Results may vary because the data on Twitter is very
+                  vague and unclear. The tweets may contain vulgar language as
+                  we do not clear them before or after classifying</u
+                ></i
+              >
+            </p>
+          </div>
+          <hr />
+          <br />
+
+          <div class="row text-center">
+            <p class="heading">Introduction</p>
+          </div>
+          <!-- row -->
+
+          <div class="row">
+            <p>
+              Sentiment is defined as a person's opinion regarding anything. It
+              can be either Positive Neutral or Negative. Twitter is one of the
+              most popular Social Media Website where people tweet about a lot
+              of stuff and give their opinion regarding different things.<br /><br />
+              Sentiment Search Engine is a Search Engine that takes tweets from
+              Twitter and classify them as Positive Neutral or Negative.<br /><br />
+              Let’s suppose a company launches a new product and after some time
+              they want to check the success/failure of their product. What they
+              can do is they can Search the name of their product in our search
+              engine and it will pick up live tweets (150 in number) from
+              twitter and classify them as Positive Neutral or Negative and will
+              also provide a summary of how many people are in favor or against
+              their product. The user will be able to see read the comments as
+              well.
+            </p>
+          </div>
+          <!-- row -->
+          <br />
+          <hr />
+
+          <div class="row text-center">
+            <p class="heading">Methodologies</p>
+          </div>
+          <!-- row -->
+
+          <div class="row text-center">
+            <div class="col-md-6">
+              <h4>Lexicon Based Approach</h4>
+              <p>
+                Also called Dictionary Based Approach in this approach we have a
+                dictionary containing polarity values for different words. After
+                Preprocessing of each Tweet from Twitter we take polarity values
+                from that dictionary and then sum them up to calculate the
+                overall sentiment of the sentence.
+              </p>
+            </div>
+            <!-- col-md-6 -->
+
+            <div class="col-md-6">
+              <h4>Machine Learning Approach</h4>
+              <p>
+                In this Approach we provide a model to the machine and then
+                train the machine to classify tweet. The model we have used is
+                called <i><u>Bag of Words Model</u></i> and the Machine Learning
+                Algorithm we have used is called
+                <i><u>Support Vector Machine (SVM)</u></i>
+              </p>
+            </div>
+            <!-- col-md-6 -->
+          </div>
+          <!-- row -->
+          <hr />
+          <br />
+
+          <div class="row text-center">
+            <p class="heading">Technologies Used</p>
+          </div>
+          <!-- row -->
+          <br />
+
+          <div class="row text-center logos">
+            <div class="col-md-2">
+              <img
+                src="{{ url_for('static' , filename='images/pythonLogo.png') }}"
+              />
+            </div>
+            <div class="col-md-2">
+              <img
+                src="{{ url_for('static' , filename='images/sklearnLogo.png') }}"
+              />
+            </div>
+            <div class="col-md-2">
+              <img
+                src="{{ url_for('static' , filename='images/flaskLogo.svg') }}"
+              />
+            </div>
+            <div class="col-md-2">
+              <img
+                src="{{ url_for('static' , filename='images/bootstrapLogo.png') }}"
+              />
+            </div>
+            <div class="col-md-2">
+              <img
+                src="{{ url_for('static' , filename='images/jqueryLogo.gif') }}"
+              />
+            </div>
+            <div class="col-md-2">
+              <img
+                src="{{ url_for('static' , filename='images/twitterLogo.png') }}"
+              />
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- col-xs-10 -->
+
+        <div class="col-xs-1 col-xs-offset-1">
+          <br />
+          <br />
+          <label class="gotoHome glyphicon glyphicon-home"></label>
+        </div>
+        <!-- col-xs-2 -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+    <br /><br /><br />
+  </body>
+
+  <!--From here  -->
+
+  <script type="text/javascript">
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+
+    $(".gotoHome").click(function() {
+      location.href = "{{ url_for('index') }}";
+    });
+  </script>
+</html>

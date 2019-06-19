@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>S.S.E | Home</title>
+		<script src="{{ url_for('static' , filename= 'js/jquery.js') }}"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script src="{{ url_for('static' , filename='js/bootstrap.min.js') }}"></script>
+
+		<link rel="stylesheet" type="text/css" href="{{url_for('static' , filename='css/bootstrap.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static' , filename='css/bootstrap-theme.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static' , filename='css/styles.css')}}">
+
+	</head>
+	<body id="index">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3 text-center">
+					<span class="logo cBlue">Sentiment Search Engine</span>
+				</div>
+			</div> <!-- row -->
+			<br/>
+
+			<div class="row">
+				<div class="col-xs-2 col-xs-offset-3 bar bgGreen"></div>
+				<div class="col-xs-2 text-center bar bgYellow"></div>
+				<div class="col-xs-2 text-center bar bgRed"></div>
+			</div> <!-- row -->
+
+			<form method="POST" action="{{ url_for('results') }}">
+				<div class="row txt">
+					<div class="col-md-6 col-md-offset-3 text-center">
+						<input type="text" class="form-control searchBox" name="searchQuery" placeholder="Search something like Ronaldo etc or click 'Options' for an Idea ... " />
+					</div>
+
+					<div class="col-md-1 text-center">
+						<button class="glyphicon glyphicon-search searchBtn cBlue" type="submit" name="searchBtn" value="searchQuery"></button>
+					</div>
+				</div> <!-- row -->
+				<br/>
+
+				<div class="row">
+
+					<div class="col-md-2 col-md-offset-4 text-center">
+						<label class="aboutBtn aboutPage">About Project</label>
+					</div>
+
+					<div class="col-md-2 text-center">
+						<label class="optionBtn" data-toggle="modal" data-target="#optionsModal">Options</label>
+					</div>
+
+					<!-- Modal Options -->
+					<div class="modal fade" id="optionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-body" id="bodyOptions">
+									<ul class="nav nav-tabs">
+										<li id="btnTech" class="active"><a href="#">Tech</a></li>
+										<li id="btnPolitics" class=""><a href="#">Politicians</a></li>
+										<li id="btnSport" class=""><a href="#">Sport Celebreties</a></li>
+										<li id="btnVehicles" class=""><a href="#">Vehicles</a></li>
+									</ul>
+									<br>
+
+									<ul class="list-group" id="Tech">
+										<li class="list-group-item"><input type='radio' name="searchSelect" value="Samsung"> Samsung</input></li>
+										<li class="list-group-item"><input type='radio' name="searchSelect" value="Apple"> Apple</input></li>
+										<li class="list-group-item"><input type='radio' name="searchSelect" value="Dell"> Dell</input></li>
+									</ul>
+
+									<ul class="list-group" id="Politics">
+										<li class="list-group-item"><input type='radio' name='searchSelect' value="Donald Trump"> Donald Trump</input></li>
+										<li class="list-group-item"><input type='radio' name='searchSelect' value="Imran Khan"> Imran Khan</input></li>
+									</ul>
+
+									<ul class="list-group" id="Sport">
+										<li class="list-group-item"><input type="radio" name="searchSelect" value="Ronaldo"> Ronaldo</input></li>
+										<li class="list-group-item"><input type="radio" name="searchSelect" value="Messi"> Messi</input></li>
+										<li class="list-group-item"><input type="radio" name="searchSelect" value="Shahid Khan Afridi"> Shahid Khan Afridi</input></li>
+									</ul>
+
+									<ul class="list-group" id="Vehicles">
+										<li class="list-group-item"><input type="radio" name="searchSelect" value="Honda"> Honda</input></li>
+										<li class="list-group-item"><input type="radio" name="searchSelect" value="Lamborghini"> Lamborghini</input></li>
+										<li class="list-group-item"><input type="radio" name="searchSelect" value="Bugatti"> Bugatti</input></li>
+									</ul>
+
+								</div>
+
+								<div class="modal-body text-center" id="bodyMessage">
+									<h3 class="cBlue">This might Take a while. Thankyou for your Patience</h3>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button id="modalSearchBtn" type="submit" class="btn btn-primary" name="searchBtn" value="searchSelect">Search</button>
+								</div>
+							</div> <!-- modal-content -->
+						</div> <!-- modal-dialog -->
+					</div> <!-- requirementsModal -->
+				</div> <!-- row -->
+			</form>
+		</div> <!-- container -->
+
+		<script type="text/javascript">
+			
+			$('document').ready(function() {
+
+				$('.aboutPage').click(function() {
+					location.href = "{{ url_for('about') }}";
+				});
+
+				$('#Politics').hide();
+				$('#Sport').hide();
+				$('#Vehicles').hide();
+
+				$('#btnTech').click(function() {
+					$('*').removeClass('active');
+					$(this).addClass('active');
+
+					$('#Vehicles, #Sport, #Politics').hide();
+					$('#Tech').show();
+				});
+
+				$('#btnPolitics').click(function() {
+					$('*').removeClass('active');
+					$(this).addClass('active');
+
+					$('#Sport , #Tech , #Vehicles').hide();
+					$('#Politics').show();
+				});
+
+				$('#btnSport').click(function() {
+					$('*').removeClass('active');
+					$(this).addClass('active');
+
+					$('#Tech , #Politics , #Vehicles').hide();
+					$('#Sport').show();
+				});
+
+				$('#btnVehicles').click(function() {
+					$('*').removeClass('active');
+					$(this).addClass('active');
+
+					$('#Politics , #Sport , #Tech').hide();
+					$('#Vehicles').show();
+				});
+
+				$('#bodyMessage').hide();
+
+				$('#modalSearchBtn').click(function() {
+					$('#bodyOptions').hide();
+					$('#bodyMessage').show();
+					$(this).hide();
+				});
+			});
+			
+		</script>
+	</body>
+</html>
